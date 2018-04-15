@@ -13,14 +13,18 @@ RUN apt-get update && apt-get install -y \
 	&& docker-php-ext-configure gd --with-gd --with-freetype-dir=/usr/include/ --with-png-dir=/usr/include --with-jpeg-dir=/usr/include \
 	&& docker-php-ext-install gd \
 	&& docker-php-ext-install pdo_mysql \
+	&& docker-php-ext-install mysqli \
 	&& docker-php-ext-configure intl \
 	&& docker-php-ext-install intl \
 	&& docker-php-ext-install mcrypt \
 	&& docker-php-ext-install xsl \
 	&& docker-php-ext-install soap \
-	&& apt-get install -y --no-install-recommends git zip \
-	&& curl --silent --show-error https://getcomposer.org/installer | php --install-dir=/usr/local/bin --filename=composer \
-	&& apt-get clean \
+	&& apt-get install -y --no-install-recommends git zip
+	
+
+#RUN curl --silent --show-error https://getcomposer.org/installer | php --install-dir=/usr/local/bin --filename=composer
+
+RUN apt-get clean \
 	&& rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
